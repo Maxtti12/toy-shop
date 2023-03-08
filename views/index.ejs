@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Toy Shop</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+  </head>
+  <body>
+    <h1>Welcome to our Toy Shop</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="toys">Toys</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact Us</a>
+    </nav>
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi1.wp.com%2Fjasmar.com.mx%2Fwp-content%2Fuploads%2F2017%2F03%2Ftoys-banner.jpg&f=1&nofb=1&ipt=1f7945a070d0378796f40a0eaa9b1e45b32abfa642966849b2ef4ef3b4519fc7&ipo=images" alt="Toy Shop Image">
+    
+    <% if (toys && toys.length > 0) { %>
+      <h2>Newest Arrivals</h2>
+      <div class="toy-list-container">
+        <% const newestToys = toys.sort((a, b) => b._id.getTimestamp() - a._id.getTimestamp()).slice(0, 3); %>
+        <% newestToys.forEach((toy) => { %>
+          <div class="toy-frame">
+            <div class="toy">
+              <h3><%= toy.name %></h3>
+              <p><%= toy.description %></p>
+              <p><strong>Price:</strong> <%= toy.price %></p>
+              <img src="<%= toy.imageUrl %>" alt="<%= toy.name %>" class="product-img">
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p>No toys found</p>
+    <% } %>
+    
+    <form action="/search" method="GET">
+      <input type="text" name="q" placeholder="Search toys...">
+      <button type="submit">Search</button>
+    </form>
+    
+
+    <h2>Special Offers</h2>
+    <p>Check back soon for our latest special offers.</p>
+    <footer>
+      <p>&copy; 2023 Toy Shop. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
